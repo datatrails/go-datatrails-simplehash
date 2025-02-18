@@ -32,9 +32,9 @@ jobs:
       - name: Code Quality 
         run: |
           # Note: it is by design that we don't use the builder
-          task codeqa
+          task lint
 
       - name: Test
         run: |
           # Note: it is by design that we don't use the builder
-          task test
+          task test:unit

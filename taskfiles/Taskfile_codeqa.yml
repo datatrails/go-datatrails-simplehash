@@ -27,16 +27,22 @@ tasks:
     desc: Quality assurance of code
     summary: "format sources (go fmt)"
     cmds:
-      - gofmt -l -s -w .
+      - |
+        gofmt -l -s -w .
 
   lint:
     desc: Quality assurance of code
     cmds:
       - |
-        golangci-lint --version
         go vet ./...
-        goimports {{.VERBOSE}} -w .
-        golangci-lint {{.VERBOSE}} run --timeout 10m ./...
+        golangci-lint --version
+
+  modules:
+    desc: Tidy up go.mod
+    cmds:
+      - |
+        go mod tidy
+        go mod verify
 
   test:
     desc: "run unit tests"

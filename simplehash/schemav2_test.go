@@ -65,10 +65,7 @@ var (
 			From:               "0xf8dfc073650503aeD429E414bE7e972f8F095e70",
 			TenantIdentity:     "tenant/0684984b-654d-4301-ad10-a508126e187d",
 			MerklelogEntry: &v2assets.MerkleLogEntry{
-				LogVersion: 1,
-				LogEpoch:   2,
-				Commit: &v2assets.MerkleLogCommitMongoDB{
-					LeafIndex:   1,
+				Commit: &v2assets.MerkleLogCommit{
 					Index:       2,
 					Idtimestamp: "0xff00ff00ff",
 				},
