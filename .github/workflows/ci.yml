@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Code quality and unit tests
+    name: Quality Control
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
