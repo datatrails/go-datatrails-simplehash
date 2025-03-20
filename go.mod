@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/datatrails/go-datatrails-common-api-gen v0.3.7
 	github.com/golang/protobuf v1.5.3
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/zeebo/bencode v1.0.0
 	google.golang.org/protobuf v1.31.0
 )
