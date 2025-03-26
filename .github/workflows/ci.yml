@@ -18,7 +18,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.21.x'
+          go-version: '1.24.x'
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-dependency-path: |
             datatrails-common-api/go.sum
@@ -26,7 +26,7 @@ jobs:
       - name: Install Go quality tools
         run: |
           go install golang.org/x/tools/cmd/goimports@latest
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "${PWD}/bin" v1.55.2
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "${PWD}/bin" v1.64.2
           echo "${PWD}/bin" >> $GITHUB_PATH
 
       - name: Code Quality 
