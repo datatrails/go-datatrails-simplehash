@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	v2assets "github.com/datatrails/go-datatrails-common-api-gen/assets/v2/assets"
-	"github.com/datatrails/go-datatrails-common-api-gen/attribute/v2/attribute"
-	"github.com/datatrails/go-datatrails-common-api-gen/marshalers/simpleoneof"
+	v2assets "github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/assets/v2/assets"
+	"github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/attribute/v2/attribute"
+	"github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/marshalers/simpleoneof"
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/timestamppb"

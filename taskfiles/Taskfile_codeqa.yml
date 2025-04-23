@@ -33,12 +33,32 @@ tasks:
     desc: Quality assurance of code
     cmds:
       - |
+        set -euo pipefail
         golangci-lint --version
         go vet ./...
         goimports {{.VERBOSE}} -w .
         golangci-lint {{.VERBOSE}} run --timeout 10m ./...
 
+  vulncheck:
+    desc: Vulnerability check
+    cmds:
+      - go run golang.org/x/vuln/cmd/govulncheck@latest -show verbose ./...
+
   test:
     desc: "run unit tests"
     cmds:
       - go test {{.GO_TEST_TAGS}} ./...
+
+  change:
+    desc: Edit recently copied code from other repo
+    cmds:
+      - |
+        set -euo pipefail
+        ORG=github.com/datatrails
+        SOURCE=$ORG/go-datatrails-common-api-gen
+        TARGET=$ORG/go-datatrails-simplehash/go-datatrails-common-api-gen
+        for f in `find -name '*.go'`
+        do 
+            sed -i "s#$SOURCE/#$TARGET/#" $f
+        done
+
