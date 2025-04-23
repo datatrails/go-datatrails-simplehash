@@ -7,7 +7,7 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v1.2.1
 	github.com/golang/protobuf v1.5.4
 	github.com/google/uuid v1.6.0
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.23.0
 	github.com/stretchr/testify v1.10.0
 	github.com/zeebo/bencode v1.0.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250106144421-5f5ef82da422
