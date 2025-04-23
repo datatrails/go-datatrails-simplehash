@@ -30,6 +30,7 @@ tasks:
     cmds:
       - task: codeqa:format
       - task: codeqa:lint
+      - task: codeqa:vulncheck
 
   build:
     desc: ensure go build works for all packages
