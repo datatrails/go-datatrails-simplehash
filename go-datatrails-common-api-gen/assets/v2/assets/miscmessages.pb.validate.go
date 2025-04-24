@@ -106,7 +106,7 @@ type EventCommitMessageMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m EventCommitMessageMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -239,7 +239,7 @@ type EventReceiptMessageMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m EventReceiptMessageMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -343,7 +343,7 @@ type PublicAssetURLResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PublicAssetURLResponseMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -447,7 +447,7 @@ type PublicEventURLResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m PublicEventURLResponseMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

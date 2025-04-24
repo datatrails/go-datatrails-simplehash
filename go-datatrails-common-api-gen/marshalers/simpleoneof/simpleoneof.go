@@ -773,6 +773,20 @@ func (m *WrappedDecoder) Decode(obj any) error {
 
 			newMsg.Set(f, enumValue)
 
+		case protoreflect.Int32Kind:
+			{
+				// We know to expect an int32 so we can be explicit about it.
+				var hopefulInt32 int32
+				ee := json.Unmarshal(data[string(f.Name())], &hopefulInt32)
+				if ee != nil {
+					logger.Sugar.Infof("ERR: %v", ee)
+					return ee
+				}
+
+				v = protoreflect.ValueOf(hopefulInt32)
+				newMsg.Set(f, v)
+			}
+
 		default:
 			if f.IsList() {
 				vv := []json.RawMessage{}

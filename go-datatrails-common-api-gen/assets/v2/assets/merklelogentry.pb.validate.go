@@ -59,8 +59,6 @@ func (m *MerkleLogCommit) validate(all bool) error {
 
 	// no validation rules for Index
 
-	// no validation rules for LeafIndex
-
 	// no validation rules for Idtimestamp
 
 	if len(errors) > 0 {
@@ -77,7 +75,7 @@ type MerkleLogCommitMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m MerkleLogCommitMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -141,49 +139,53 @@ var _ interface {
 	ErrorName() string
 } = MerkleLogCommitValidationError{}
 
-// Validate checks the field values on MerkleLogCommitMongoDB with the rules
+// Validate checks the field values on MerkleLogActiveItem with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *MerkleLogCommitMongoDB) Validate() error {
+func (m *MerkleLogActiveItem) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on MerkleLogCommitMongoDB with the rules
+// ValidateAll checks the field values on MerkleLogActiveItem with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// MerkleLogCommitMongoDBMultiError, or nil if none found.
-func (m *MerkleLogCommitMongoDB) ValidateAll() error {
+// MerkleLogActiveItemMultiError, or nil if none found.
+func (m *MerkleLogActiveItem) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *MerkleLogCommitMongoDB) validate(all bool) error {
+func (m *MerkleLogActiveItem) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Index
+	// no validation rules for TenantIdentity
 
-	// no validation rules for LeafIndex
+	// no validation rules for Massif
 
-	// no validation rules for Idtimestamp
+	// no validation rules for Seal
+
+	// no validation rules for MassifLastid
+
+	// no validation rules for SealLastid
 
 	if len(errors) > 0 {
-		return MerkleLogCommitMongoDBMultiError(errors)
+		return MerkleLogActiveItemMultiError(errors)
 	}
 
 	return nil
 }
 
-// MerkleLogCommitMongoDBMultiError is an error wrapping multiple validation
-// errors returned by MerkleLogCommitMongoDB.ValidateAll() if the designated
+// MerkleLogActiveItemMultiError is an error wrapping multiple validation
+// errors returned by MerkleLogActiveItem.ValidateAll() if the designated
 // constraints aren't met.
-type MerkleLogCommitMongoDBMultiError []error
+type MerkleLogActiveItemMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m MerkleLogCommitMongoDBMultiError) Error() string {
-	var msgs []string
+func (m MerkleLogActiveItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -191,11 +193,11 @@ func (m MerkleLogCommitMongoDBMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m MerkleLogCommitMongoDBMultiError) AllErrors() []error { return m }
+func (m MerkleLogActiveItemMultiError) AllErrors() []error { return m }
 
-// MerkleLogCommitMongoDBValidationError is the validation error returned by
-// MerkleLogCommitMongoDB.Validate if the designated constraints aren't met.
-type MerkleLogCommitMongoDBValidationError struct {
+// MerkleLogActiveItemValidationError is the validation error returned by
+// MerkleLogActiveItem.Validate if the designated constraints aren't met.
+type MerkleLogActiveItemValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -203,24 +205,24 @@ type MerkleLogCommitMongoDBValidationError struct {
 }
 
 // Field function returns field value.
-func (e MerkleLogCommitMongoDBValidationError) Field() string { return e.field }
+func (e MerkleLogActiveItemValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e MerkleLogCommitMongoDBValidationError) Reason() string { return e.reason }
+func (e MerkleLogActiveItemValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e MerkleLogCommitMongoDBValidationError) Cause() error { return e.cause }
+func (e MerkleLogActiveItemValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e MerkleLogCommitMongoDBValidationError) Key() bool { return e.key }
+func (e MerkleLogActiveItemValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e MerkleLogCommitMongoDBValidationError) ErrorName() string {
-	return "MerkleLogCommitMongoDBValidationError"
+func (e MerkleLogActiveItemValidationError) ErrorName() string {
+	return "MerkleLogActiveItemValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e MerkleLogCommitMongoDBValidationError) Error() string {
+func (e MerkleLogActiveItemValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -232,14 +234,14 @@ func (e MerkleLogCommitMongoDBValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sMerkleLogCommitMongoDB.%s: %s%s",
+		"invalid %sMerkleLogActiveItem.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = MerkleLogCommitMongoDBValidationError{}
+var _ error = MerkleLogActiveItemValidationError{}
 
 var _ interface {
 	Field() string
@@ -247,7 +249,359 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = MerkleLogCommitMongoDBValidationError{}
+} = MerkleLogActiveItemValidationError{}
+
+// Validate checks the field values on MerkleLogActiveSince with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MerkleLogActiveSince) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MerkleLogActiveSince with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MerkleLogActiveSinceMultiError, or nil if none found.
+func (m *MerkleLogActiveSince) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MerkleLogActiveSince) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SinceIdtimestamp
+
+	// no validation rules for TimestampMs
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MerkleLogActiveSinceValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MerkleLogActiveSinceValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MerkleLogActiveSinceValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return MerkleLogActiveSinceMultiError(errors)
+	}
+
+	return nil
+}
+
+// MerkleLogActiveSinceMultiError is an error wrapping multiple validation
+// errors returned by MerkleLogActiveSince.ValidateAll() if the designated
+// constraints aren't met.
+type MerkleLogActiveSinceMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MerkleLogActiveSinceMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MerkleLogActiveSinceMultiError) AllErrors() []error { return m }
+
+// MerkleLogActiveSinceValidationError is the validation error returned by
+// MerkleLogActiveSince.Validate if the designated constraints aren't met.
+type MerkleLogActiveSinceValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MerkleLogActiveSinceValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MerkleLogActiveSinceValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MerkleLogActiveSinceValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MerkleLogActiveSinceValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MerkleLogActiveSinceValidationError) ErrorName() string {
+	return "MerkleLogActiveSinceValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MerkleLogActiveSinceValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMerkleLogActiveSince.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MerkleLogActiveSinceValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MerkleLogActiveSinceValidationError{}
+
+// Validate checks the field values on MerkleLogConfirm with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *MerkleLogConfirm) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MerkleLogConfirm with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MerkleLogConfirmMultiError, or nil if none found.
+func (m *MerkleLogConfirm) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MerkleLogConfirm) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MmrSize
+
+	// no validation rules for Root
+
+	// no validation rules for Timestamp
+
+	// no validation rules for Idtimestamp
+
+	// no validation rules for SignedTreeHead
+
+	if len(errors) > 0 {
+		return MerkleLogConfirmMultiError(errors)
+	}
+
+	return nil
+}
+
+// MerkleLogConfirmMultiError is an error wrapping multiple validation errors
+// returned by MerkleLogConfirm.ValidateAll() if the designated constraints
+// aren't met.
+type MerkleLogConfirmMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MerkleLogConfirmMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MerkleLogConfirmMultiError) AllErrors() []error { return m }
+
+// MerkleLogConfirmValidationError is the validation error returned by
+// MerkleLogConfirm.Validate if the designated constraints aren't met.
+type MerkleLogConfirmValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MerkleLogConfirmValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MerkleLogConfirmValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MerkleLogConfirmValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MerkleLogConfirmValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MerkleLogConfirmValidationError) ErrorName() string { return "MerkleLogConfirmValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MerkleLogConfirmValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMerkleLogConfirm.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MerkleLogConfirmValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MerkleLogConfirmValidationError{}
+
+// Validate checks the field values on MerkleLogUnequivocal with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MerkleLogUnequivocal) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MerkleLogUnequivocal with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MerkleLogUnequivocalMultiError, or nil if none found.
+func (m *MerkleLogUnequivocal) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MerkleLogUnequivocal) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return MerkleLogUnequivocalMultiError(errors)
+	}
+
+	return nil
+}
+
+// MerkleLogUnequivocalMultiError is an error wrapping multiple validation
+// errors returned by MerkleLogUnequivocal.ValidateAll() if the designated
+// constraints aren't met.
+type MerkleLogUnequivocalMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MerkleLogUnequivocalMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MerkleLogUnequivocalMultiError) AllErrors() []error { return m }
+
+// MerkleLogUnequivocalValidationError is the validation error returned by
+// MerkleLogUnequivocal.Validate if the designated constraints aren't met.
+type MerkleLogUnequivocalValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MerkleLogUnequivocalValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MerkleLogUnequivocalValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MerkleLogUnequivocalValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MerkleLogUnequivocalValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MerkleLogUnequivocalValidationError) ErrorName() string {
+	return "MerkleLogUnequivocalValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MerkleLogUnequivocalValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMerkleLogUnequivocal.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MerkleLogUnequivocalValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MerkleLogUnequivocalValidationError{}
 
 // Validate checks the field values on MerkleLogCommitMessage with the rules
 // defined in the proto definition for this message. If any rules are
@@ -304,10 +658,6 @@ func (m *MerkleLogCommitMessage) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for LogVersion
-
-	// no validation rules for LogEpoch
-
 	if all {
 		switch v := interface{}(m.GetCommit()).(type) {
 		case interface{ ValidateAll() error }:
@@ -351,7 +701,7 @@ type MerkleLogCommitMessageMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m MerkleLogCommitMessageMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -417,6 +767,273 @@ var _ interface {
 	ErrorName() string
 } = MerkleLogCommitMessageValidationError{}
 
+// Validate checks the field values on MerkleLogConfirmMessage with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MerkleLogConfirmMessage) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MerkleLogConfirmMessage with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MerkleLogConfirmMessageMultiError, or nil if none found.
+func (m *MerkleLogConfirmMessage) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MerkleLogConfirmMessage) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TenantIdentity
+
+	if all {
+		switch v := interface{}(m.GetConfirm()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MerkleLogConfirmMessageValidationError{
+					field:  "Confirm",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MerkleLogConfirmMessageValidationError{
+					field:  "Confirm",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetConfirm()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MerkleLogConfirmMessageValidationError{
+				field:  "Confirm",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MerkleLogConfirmMessageMultiError(errors)
+	}
+
+	return nil
+}
+
+// MerkleLogConfirmMessageMultiError is an error wrapping multiple validation
+// errors returned by MerkleLogConfirmMessage.ValidateAll() if the designated
+// constraints aren't met.
+type MerkleLogConfirmMessageMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MerkleLogConfirmMessageMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MerkleLogConfirmMessageMultiError) AllErrors() []error { return m }
+
+// MerkleLogConfirmMessageValidationError is the validation error returned by
+// MerkleLogConfirmMessage.Validate if the designated constraints aren't met.
+type MerkleLogConfirmMessageValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MerkleLogConfirmMessageValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MerkleLogConfirmMessageValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MerkleLogConfirmMessageValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MerkleLogConfirmMessageValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MerkleLogConfirmMessageValidationError) ErrorName() string {
+	return "MerkleLogConfirmMessageValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MerkleLogConfirmMessageValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMerkleLogConfirmMessage.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MerkleLogConfirmMessageValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MerkleLogConfirmMessageValidationError{}
+
+// Validate checks the field values on MerkleLogUnequivocalMessage with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MerkleLogUnequivocalMessage) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MerkleLogUnequivocalMessage with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MerkleLogUnequivocalMessageMultiError, or nil if none found.
+func (m *MerkleLogUnequivocalMessage) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MerkleLogUnequivocalMessage) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TenantIdentity
+
+	if all {
+		switch v := interface{}(m.GetUnequivocal()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MerkleLogUnequivocalMessageValidationError{
+					field:  "Unequivocal",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MerkleLogUnequivocalMessageValidationError{
+					field:  "Unequivocal",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUnequivocal()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MerkleLogUnequivocalMessageValidationError{
+				field:  "Unequivocal",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MerkleLogUnequivocalMessageMultiError(errors)
+	}
+
+	return nil
+}
+
+// MerkleLogUnequivocalMessageMultiError is an error wrapping multiple
+// validation errors returned by MerkleLogUnequivocalMessage.ValidateAll() if
+// the designated constraints aren't met.
+type MerkleLogUnequivocalMessageMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MerkleLogUnequivocalMessageMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MerkleLogUnequivocalMessageMultiError) AllErrors() []error { return m }
+
+// MerkleLogUnequivocalMessageValidationError is the validation error returned
+// by MerkleLogUnequivocalMessage.Validate if the designated constraints
+// aren't met.
+type MerkleLogUnequivocalMessageValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MerkleLogUnequivocalMessageValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MerkleLogUnequivocalMessageValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MerkleLogUnequivocalMessageValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MerkleLogUnequivocalMessageValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MerkleLogUnequivocalMessageValidationError) ErrorName() string {
+	return "MerkleLogUnequivocalMessageValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MerkleLogUnequivocalMessageValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMerkleLogUnequivocalMessage.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MerkleLogUnequivocalMessageValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MerkleLogUnequivocalMessageValidationError{}
+
 // Validate checks the field values on MerkleLogEntry with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -438,10 +1055,6 @@ func (m *MerkleLogEntry) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for LogVersion
-
-	// no validation rules for LogEpoch
 
 	if all {
 		switch v := interface{}(m.GetCommit()).(type) {
@@ -472,6 +1085,64 @@ func (m *MerkleLogEntry) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetConfirm()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MerkleLogEntryValidationError{
+					field:  "Confirm",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MerkleLogEntryValidationError{
+					field:  "Confirm",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetConfirm()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MerkleLogEntryValidationError{
+				field:  "Confirm",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUnequivocal()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MerkleLogEntryValidationError{
+					field:  "Unequivocal",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MerkleLogEntryValidationError{
+					field:  "Unequivocal",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUnequivocal()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MerkleLogEntryValidationError{
+				field:  "Unequivocal",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return MerkleLogEntryMultiError(errors)
 	}
@@ -486,7 +1157,7 @@ type MerkleLogEntryMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m MerkleLogEntryMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

@@ -471,6 +471,55 @@ func (m *ListEventsRequest) validate(all bool) error {
 
 	}
 
+	if m.MmrIndex != nil {
+
+		if m.GetMmrIndex() < 0 {
+			err := ListEventsRequestValidationError{
+				field:  "MmrIndex",
+				reason: "value must be greater than or equal to 0",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if m.From != nil {
+
+		if !_ListEventsRequest_From_Pattern.MatchString(m.GetFrom()) {
+			err := ListEventsRequestValidationError{
+				field:  "From",
+				reason: "value does not match regex pattern \"^0x[[:xdigit:]]+$\"",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if m.MinimumTrust != nil {
+
+		if _, ok := ConfirmationStatus_name[int32(m.GetMinimumTrust())]; !ok {
+			err := ListEventsRequestValidationError{
+				field:  "MinimumTrust",
+				reason: "value must be one of the defined enum values",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
+
 	if len(errors) > 0 {
 		return ListEventsRequestMultiError(errors)
 	}
@@ -485,7 +534,7 @@ type ListEventsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ListEventsRequestMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -556,6 +605,8 @@ var _ListEventsRequest_Uuid_Pattern = regexp.MustCompile("^(-|[a-fA-F0-9]{8}-[a-
 var _ListEventsRequest_EventAttributes_Pattern = regexp.MustCompile("^[^[:cntrl:]]+$")
 
 var _ListEventsRequest_AssetAttributes_Pattern = regexp.MustCompile("^[^[:cntrl:]]+$")
+
+var _ListEventsRequest_From_Pattern = regexp.MustCompile("^0x[[:xdigit:]]+$")
 
 // Validate checks the field values on ListEventsResponse with the rules
 // defined in the proto definition for this message. If any rules are
@@ -629,7 +680,7 @@ type ListEventsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ListEventsResponseMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -769,7 +820,7 @@ type ListEventsRequest_AssetQueryMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ListEventsRequest_AssetQueryMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

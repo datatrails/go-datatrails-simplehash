@@ -6,7 +6,7 @@ tasks:
 
   generate:
     desc: Generate all mocks
-    deps:
+    cmds:
       - echo "no packages currently require mocks"
 
   generate-single-mock:

@@ -104,7 +104,7 @@ func local_request_PublicAssets_GetPublicEvent_0(ctx context.Context, marshaler 
 }
 
 var (
-	filter_PublicAssets_GetPublicAsset_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_PublicAssets_GetPublicAsset_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_PublicAssets_GetPublicAsset_0(ctx context.Context, marshaler runtime.Marshaler, client PublicAssetsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -174,7 +174,7 @@ func local_request_PublicAssets_GetPublicAsset_0(ctx context.Context, marshaler 
 }
 
 var (
-	filter_PublicAssets_ListPublicEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_PublicAssets_ListPublicEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{"uuid": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_PublicAssets_ListPublicEvents_0(ctx context.Context, marshaler runtime.Marshaler, client PublicAssetsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -247,6 +247,7 @@ func local_request_PublicAssets_ListPublicEvents_0(ctx context.Context, marshale
 // UnaryRPC     :call PublicAssetsServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterPublicAssetsHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterPublicAssetsHandlerServer(ctx context.Context, mux *runtime.ServeMux, server PublicAssetsServer) error {
 
 	mux.Handle("GET", pattern_PublicAssets_GetPublicEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -330,21 +331,21 @@ func RegisterPublicAssetsHandlerServer(ctx context.Context, mux *runtime.ServeMu
 // RegisterPublicAssetsHandlerFromEndpoint is same as RegisterPublicAssetsHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterPublicAssetsHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
@@ -362,7 +363,7 @@ func RegisterPublicAssetsHandler(ctx context.Context, mux *runtime.ServeMux, con
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "PublicAssetsClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "PublicAssetsClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "PublicAssetsClient" to call the correct interceptors.
+// "PublicAssetsClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterPublicAssetsHandlerClient(ctx context.Context, mux *runtime.ServeMux, client PublicAssetsClient) error {
 
 	mux.Handle("GET", pattern_PublicAssets_GetPublicEvent_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {

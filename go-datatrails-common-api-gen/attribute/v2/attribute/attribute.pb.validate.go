@@ -118,7 +118,7 @@ type DictAttrMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m DictAttrMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -251,7 +251,7 @@ type ListAttrMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m ListAttrMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -460,7 +460,7 @@ type AttributeMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m AttributeMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}

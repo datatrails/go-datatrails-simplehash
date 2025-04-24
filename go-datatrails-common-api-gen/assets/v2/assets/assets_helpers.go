@@ -22,7 +22,10 @@ func PublicBoolToPrivacy(b bool) Privacy {
 
 // PrivacyToPublicBool converts Privacy to bool
 func PrivacyToPublicBool(b Privacy) bool {
-	return b == Privacy_PUBLIC
+	if b == Privacy_PUBLIC {
+		return true
+	}
+	return false
 }
 
 // PrivacyStringToPublicBool converts a string repr of Privacy enum to bool.

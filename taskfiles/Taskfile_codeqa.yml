@@ -50,7 +50,11 @@ tasks:
       - go test {{.GO_TEST_TAGS}} ./...
 
   change:
-    desc: Edit recently copied code from other repo
+    desc: |
+      Edit recently copied code from other repo. this is overkill as it also alters some generated
+      code such that tests panic with incorrect slices error. The solution is to manually undo any edited
+      changes that are not import statements i.e. the change below should only be applied to import statements.
+      The correct silutiion would be to generate the code in this repo but we want to hide the proto files.
     cmds:
       - |
         set -euo pipefail
@@ -59,6 +63,6 @@ tasks:
         TARGET=$ORG/go-datatrails-simplehash/go-datatrails-common-api-gen
         for f in `find -name '*.go'`
         do 
-            sed -i "s#$SOURCE/#$TARGET/#" $f
+            sed -i 's#"'"$SOURCE/#"'"'"$TARGET/#" $f
         done
 

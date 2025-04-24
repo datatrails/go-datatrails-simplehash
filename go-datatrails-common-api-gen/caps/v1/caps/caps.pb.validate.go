@@ -71,7 +71,7 @@ type GetCapsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m GetCapsRequestMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -178,6 +178,17 @@ func (m *Cap) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.GetResourceCap() < -1 {
+		err := CapValidationError{
+			field:  "ResourceCap",
+			reason: "value must be greater than or equal to -1",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return CapMultiError(errors)
 	}
@@ -191,7 +202,7 @@ type CapMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CapMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
@@ -323,7 +334,7 @@ type CapsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
 func (m CapsMultiError) Error() string {
-	var msgs []string
+	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
 	}
