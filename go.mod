@@ -3,7 +3,7 @@ module github.com/datatrails/go-datatrails-simplehash
 go 1.24
 
 require (
-	github.com/datatrails/go-datatrails-common v0.29.0
+	github.com/datatrails/go-datatrails-common v0.30.0
 	github.com/envoyproxy/protoc-gen-validate v1.2.1
 	github.com/golang/protobuf v1.5.4
 	github.com/google/uuid v1.6.0
