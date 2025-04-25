@@ -5,12 +5,3 @@ schemes for datatrails events.
 
 For context, see [verifying-with-simple-hash](https://docs.datatrails.com/developers/developer-patterns/verifying-with-simple-hash/)
 
-## Copied code
-
-This repo uses generated code copied from another repo. The code is copied into
-the directory go-datatrails-common-api-gen and edited using the command:
-
-```bash
-task codeqa:change
-```
-

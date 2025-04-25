@@ -7,10 +7,9 @@ import (
 	"testing"
 	"time"
 
-	v2assets "github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/assets/v2/assets"
-	"github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/attribute/v2/attribute"
-	"github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/marshalers/simpleoneof"
-	"github.com/golang/protobuf/ptypes/timestamp"
+	v2assets "github.com/datatrails/go-datatrails-common-api-gen/assets/v2/assets"
+	"github.com/datatrails/go-datatrails-common-api-gen/attribute/v2/attribute"
+	"github.com/datatrails/go-datatrails-common-api-gen/marshalers/simpleoneof"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -46,9 +45,9 @@ var (
 			},
 			Operation:          "Record",
 			Behaviour:          "RecordEvidence",
-			TimestampDeclared:  &timestamp.Timestamp{Seconds: 1665926090},
-			TimestampAccepted:  &timestamp.Timestamp{Seconds: 1665926095},
-			TimestampCommitted: &timestamp.Timestamp{Seconds: 1665926099},
+			TimestampDeclared:  timestamppb.New(time.Unix(1665926090, 0)),
+			TimestampAccepted:  timestamppb.New(time.Unix(1665926095, 0)),
+			TimestampCommitted: timestamppb.New(time.Unix(1665926099, 0)),
 			PrincipalDeclared: &v2assets.Principal{
 				Issuer:      "https://rkvt.com",
 				Subject:     "117303158125148247777",
@@ -65,10 +64,7 @@ var (
 			From:               "0xf8dfc073650503aeD429E414bE7e972f8F095e70",
 			TenantIdentity:     "tenant/0684984b-654d-4301-ad10-a508126e187d",
 			MerklelogEntry: &v2assets.MerkleLogEntry{
-				LogVersion: 1,
-				LogEpoch:   2,
-				Commit: &v2assets.MerkleLogCommitMongoDB{
-					LeafIndex:   1,
+				Commit: &v2assets.MerkleLogCommit{
 					Index:       2,
 					Idtimestamp: "0xff00ff00ff",
 				},
@@ -93,9 +89,9 @@ var (
 			},
 			Operation:          "Record",
 			Behaviour:          "RecordEvidence",
-			TimestampDeclared:  &timestamp.Timestamp{Seconds: 1665126090},
-			TimestampAccepted:  &timestamp.Timestamp{Seconds: 1665126095},
-			TimestampCommitted: &timestamp.Timestamp{Seconds: 1665126099},
+			TimestampDeclared:  timestamppb.New(time.Unix(1665126090, 0)),
+			TimestampAccepted:  timestamppb.New(time.Unix(1665126095, 0)),
+			TimestampCommitted: timestamppb.New(time.Unix(1665126099, 0)),
 			PrincipalDeclared: &v2assets.Principal{
 				Issuer:      "https://rkvt.com",
 				Subject:     "227303158125148248888",
