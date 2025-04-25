@@ -4,8 +4,8 @@ import (
 	"crypto/sha256"
 	"hash"
 
-	v2assets "github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/assets/v2/assets"
-	"github.com/datatrails/go-datatrails-simplehash/go-datatrails-common-api-gen/marshalers/simpleoneof"
+	v2assets "github.com/datatrails/go-datatrails-common-api-gen/assets/v2/assets"
+	"github.com/datatrails/go-datatrails-common-api-gen/marshalers/simpleoneof"
 )
 
 type Hasher struct {
