@@ -9,7 +9,7 @@ jobs:
     name: Quality Control
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup go-task
         uses: arduino/setup-task@v2
         with:
